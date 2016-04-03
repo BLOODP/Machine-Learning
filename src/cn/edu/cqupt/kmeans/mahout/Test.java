@@ -3,14 +3,17 @@ package cn.edu.cqupt.kmeans.mahout;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.StringReader;
 import java.io.Writer;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import org.apache.commons.cli2.CommandLine;
 import org.apache.commons.cli2.Group;
@@ -34,6 +37,11 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.FileInputFormat;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.util.ToolRunner;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.apache.lucene.util.Version;
 import org.apache.mahout.cf.taste.eval.IRStatistics;
 import org.apache.mahout.cf.taste.impl.model.GenericBooleanPrefDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
@@ -45,6 +53,9 @@ import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.apache.mahout.cf.taste.similarity.precompute.example.GroupLensDataModel;
+import org.apache.mahout.classifier.ConfusionMatrix;
+import org.apache.mahout.classifier.sgd.TestNewsGroups;
+import org.apache.mahout.classifier.sgd.TrainNewsGroups;
 import org.apache.mahout.clustering.Cluster;
 import org.apache.mahout.clustering.classify.WeightedPropertyVectorWritable;
 import org.apache.mahout.clustering.kmeans.KMeansDriver;
@@ -54,12 +65,13 @@ import org.apache.mahout.common.distance.EuclideanDistanceMeasure;
 import org.apache.mahout.math.DenseVector;
 import org.apache.mahout.math.NamedVector;
 import org.apache.mahout.math.Vector;
+import org.apache.mahout.math.function.Functions;
+import org.apache.mahout.math.hadoop.similarity.cooccurrence.Vectors;
 import org.apache.mahout.vectorizer.DocumentProcessor;
-import org.apache.nutch.crawl.Injector;
-import org.apache.nutch.segment.SegmentReader;
-import org.apache.nutch.util.NutchJob;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.ConcurrentHashMultiset;
+import com.google.common.collect.Multiset;
 
 public class Test {
 	
@@ -362,8 +374,61 @@ public class Test {
 		
 		inject.inject(new Path("/crawl/"),new Path("/urls/urls/"));*/
 		
-		String s = String.format(Locale.ENGLISH, "%.1f", 3.263);
-		System.out.println(s);
+//		Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_46);
+//		TokenStream ts = analyzer.tokenStream("body", new FileReader(new File("D:\\hadoop\\20news-bydate-train\\comp.graphics\\37261")));
+//		CharTermAttribute termAtt = ts.addAttribute(CharTermAttribute.class);
+//		ts.reset();
+//		while(ts.incrementToken()){
+////			char[] termbuffer = termAtt.buffer();
+////			String w = new String(termbuffer,1,termAtt.length());
+//			String w = ts.getAttribute(CharTermAttribute.class).toString();
+//			System.out.println(w);
+//		}
+//		ts.end();
+//		ts.close();
+		
+		
+//		TrainNewsGroups.main(new String[]{"D:\\hadoop\\20news-bydate-train"});
+		
+//		String[] arg = {"--input","D:\\hadoop\\20news-bydate-test","--model","D:\\tmp\\news-group.model"};
+//		TestNewsGroups.main(arg);
+//		
+		
+//		List<String> symbols = new ArrayList<String>();
+//		symbols.add("x1");
+//		symbols.add("x2");
+//		symbols.add("x3");
+//		symbols.add("x4");
+//		
+//		ConfusionMatrix mx = new ConfusionMatrix(symbols, "unkonw");
+//		mx.addInstance("x1", "x1");
+//		mx.addInstance("x2", "x2");
+//		mx.addInstance("x3", "x3");
+//		mx.addInstance("x4", "x4");
+//		
+//		System.out.printf("%s\n\n",mx.toString());
+//		
+		
+		/*Multiset<String> set = ConcurrentHashMultiset.create();
+		set.add("hello");
+		set.add("you");
+		set.add("hello");
+		
+		System.out.println(set.count("hello"));
+		
+		for (String string : set.elementSet()) {
+			System.out.println(string);
+		}*/
+		
+		Vector v1 = new DenseVector(new double[]{1,5,6,9,8,3,12});
+		System.out.println(v1);
+		Vector v2 = new DenseVector(new double[]{2,5,4,2,3,10,12});
+		System.out.println(v2);
+		Vector sum = v1.assign(v2, Functions.PLUS);
+		System.out.println(sum);
+		System.out.println(v1);
+		System.out.println(v1.zSum());
+		
 		
 	}
 

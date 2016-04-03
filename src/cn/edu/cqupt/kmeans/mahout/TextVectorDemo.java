@@ -17,6 +17,7 @@ import org.apache.hadoop.io.IOUtils;
 import org.apache.lucene.benchmark.utils.ExtractReuters;
 import org.apache.mahout.clustering.kmeans.KMeansDriver;
 import org.apache.mahout.text.SequenceFilesFromDirectory;
+import org.apache.mahout.utils.SplitInput;
 import org.apache.mahout.vectorizer.SparseVectorsFromSequenceFiles;
 
 import cn.edu.cqupt.rubic_core.io.HDFSConnection;

@@ -1,0 +1,7 @@
+2015-12-05 22:43:31,402 INFO  crawl.Injector - Injector: starting at 2015-12-05 22:43:31
+2015-12-05 22:43:31,403 INFO  crawl.Injector - Injector: crawlDb: /crawl
+2015-12-05 22:43:31,403 INFO  crawl.Injector - Injector: urlDir: /urls/urls
+2015-12-05 22:43:31,641 INFO  crawl.Injector - Injector: Converting injected urls to crawl db entries.
+2015-12-05 22:43:35,551 WARN  mapred.JobClient - Use GenericOptionsParser for parsing the arguments. Applications should implement Tool for the same.
+2015-12-05 22:43:41,213 WARN  util.NativeCodeLoader - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2015-12-05 22:43:41,213 WARN  snappy.LoadSnappy - Snappy native library not loaded
